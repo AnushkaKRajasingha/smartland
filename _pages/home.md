@@ -11,7 +11,7 @@ post_date: 2019-02-23 12:51:07
 <h5>Apartments & Houses</h5>		
 			<h1>SMARTLAND</h1>		
 			<h2>Your Home is Our Home</h2>		
-		<p>[wre_search placeholder='Search by Keyword, City or State' submit_btn='Search' exclude='city,min_beds,min_cars' show_map="yes"]</p>		
+		[wre_search placeholder='Search by Keyword, City or State' submit_btn='Search' exclude='city,min_beds,min_cars' show_map="yes"]		
 			<h3>Pet Friendly</h3>		
 			<h2>All of our units <br />
 are pet friendly</h2>		
@@ -24,7 +24,7 @@ are pet friendly</h2>
 			<h2>Get a</h2>		
 			<h3>Free Ride</h3>		
 			<h2>Home on us</h2>		
-		<h3><strong>We do not want</strong><br /><strong>you driving home drunk </strong><br /><strong>We PAY for your ride hom</strong>e</h3>		
+		<h3>We do not want<br />you driving home drunk<br />We PAY for your ride home</h3>		
 			<a href="#" role="button">
 						Read More
 					</a>
