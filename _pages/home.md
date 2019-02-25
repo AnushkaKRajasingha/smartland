@@ -28,7 +28,7 @@ post_date: 2019-02-23 12:51:07
 						Read More
 					</a>
 			<h3>Pet Friendly</h3>		
-			<h2>All of our units are pet friendly</h2>		
+			<h2>All of our units&nbsp;are pet friendly</h2>		
 			<h1>we love pets.</h1>		
 			<a href="#" role="button">
 						Read More
