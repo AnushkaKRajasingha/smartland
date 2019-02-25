@@ -13,7 +13,8 @@ post_date: 2019-02-23 12:51:07
 			<h2>Your Home is Our Home</h2>		
 		<p>[wre_search placeholder='Search by Keyword, City or State' submit_btn='Search' exclude='city,min_beds,min_cars' show_map="yes"]</p>		
 			<h3>Pet Friendly</h3>		
-			<h2>All of our units are pet friendly</h2>		
+			<h2>All of our units 
+are pet friendly</h2>		
 			<h1>we love pets.</h1>		
 			<a href="#" role="button">
 						Read More
