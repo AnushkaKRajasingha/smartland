@@ -1,0 +1,64 @@
+/**
+ * User: anushkar
+* Date: 2/24/19
+* Time: 4:40 PM
+ */
+.listing-image {
+
+    margin-right: 1%;
+    float: left;
+    display: inline-block;
+    background-size: contain;
+    height: 300px;
+    width: 29%;
+    background-repeat: no-repeat;
+    background-position: left top;
+    background-color: #fff;
+}
+
+
+.listing-content {
+    display: inline-block;
+    max-width: 70%;
+}
+span.pub-date {
+    display: block;
+    font-size: 80%;
+    font-style: italic;
+}
+
+.listing-item {
+    clear: both;
+    margin-bottom: 2%;
+    background-image: url("../images/no-image.png");
+    background-size: 50px 50px;
+    background-position: left top;
+    background-repeat: no-repeat;
+}
+
+a.listing-more {
+    width: 100%;
+    display: block;
+}
+h3.listing-title {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.listing-category a, .listing-groups a {
+    display: inline-flex;
+    font-size: 75%;
+    margin: 0 5px;
+}
+
+.listing-category:after {
+    content: " | ";
+    font-size: 75%;
+}
+
+.listing-groups a:after{
+    content:", ";
+}
+
+.listing-groups , .listing-category{display:inline;float:left;}
+
