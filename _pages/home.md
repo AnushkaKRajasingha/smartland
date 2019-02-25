@@ -55,4 +55,13 @@ Appartments</h2>
 										<img width="200" height="150" src="https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/darkside.png" alt="" />											
 										<img width="200" height="150" src="https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/bastil.png" alt="" />											
 										<img width="200" height="150" src="https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/bolier.png" alt="" />											
-										<img width="200" height="150" src="https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/digit.png" alt="" />
+										<img width="200" height="150" src="https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/digit.png" alt="" />											
+							<a href="" target="_blank" rel="noopener noreferrer">
+					Facebook
+				</a>
+							<a href="" target="_blank" rel="noopener noreferrer">
+					Twitter
+				</a>
+							<a href="" target="_blank" rel="noopener noreferrer">
+					Google-plus
+				</a>
