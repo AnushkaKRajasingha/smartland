@@ -28,9 +28,10 @@ are pet friendly</h2>
 			<a href="#" role="button">
 						Read More
 					</a>
-			<h3>Pet Friendly</h3>		
-			<h2>All of our unitsare pet friendly</h2>		
-			<h1>we love pets.</h1>		
+			<h3>EV Charging</h3>		
+			<h3>Stations</h3>		
+			<h2>in selected <br/>
+Appartments</h2>		
 			<a href="#" role="button">
 						Read More
 					</a>
