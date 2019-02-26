@@ -50,6 +50,13 @@ Appartments</h2>
 						Read More
 					</a>
 										<img width="1000" height="870" src="https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/bicycle-Station.jpg" alt="" srcset="https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/bicycle-Station.jpg 1000w, https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/bicycle-Station-300x261.jpg 300w, https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/bicycle-Station-768x668.jpg 768w" sizes="(max-width: 1000px) 100vw, 1000px" />											
+										<img width="862" height="959" src="https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/smart.jpg" alt="" srcset="https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/smart.jpg 862w, https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/smart-270x300.jpg 270w, https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/smart-768x854.jpg 768w" sizes="(max-width: 862px) 100vw, 862px" />											
+			<h3>24 Hours</h3>		
+			<h1>Maintenance</h1>		
+			<h2>Personalized customer services</h2>		
+			<a href="#" role="button">
+						Read More
+					</a>
 		<p>Our gallery</p>		
 			<h3>Grid Gallery Slide</h3>		
 										<img width="600" height="700" src="https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/u6.jpg" alt="" srcset="https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/u6.jpg 600w, https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/u6-257x300.jpg 257w" sizes="(max-width: 600px) 100vw, 600px" />											
