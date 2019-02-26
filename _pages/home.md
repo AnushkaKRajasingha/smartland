@@ -36,7 +36,7 @@ Appartments</h2>
 						Read More
 					</a>
 										<img width="836" height="700" src="https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/EVcar.jpg" alt="" srcset="https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/EVcar.jpg 836w, https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/EVcar-300x251.jpg 300w, https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/EVcar-768x643.jpg 768w" sizes="(max-width: 836px) 100vw, 836px" />											
-										<img width="1000" height="742" src="https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/Construction-Building.png" alt="" srcset="https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/Construction-Building.png 1000w, https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/Construction-Building-300x223.png 300w, https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/Construction-Building-768x570.png 768w" sizes="(max-width: 1000px) 100vw, 1000px" />											
+										<img width="1100" height="1091" src="https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/24hrService.jpg" alt="" srcset="https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/24hrService.jpg 1100w, https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/24hrService-150x150.jpg 150w, https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/24hrService-300x298.jpg 300w, https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/24hrService-768x762.jpg 768w, https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/24hrService-1024x1016.jpg 1024w" sizes="(max-width: 1100px) 100vw, 1100px" />											
 			<h3>24 Hours</h3>		
 			<h1>Maintenance</h1>		
 			<h2>Personalized customer services</h2>		
