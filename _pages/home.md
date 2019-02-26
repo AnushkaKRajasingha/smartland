@@ -50,7 +50,7 @@ Appartments</h2>
 						Read More
 					</a>
 										<img width="1000" height="870" src="https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/bicycle-Station.jpg" alt="" srcset="https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/bicycle-Station.jpg 1000w, https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/bicycle-Station-300x261.jpg 300w, https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/bicycle-Station-768x668.jpg 768w" sizes="(max-width: 1000px) 100vw, 1000px" />											
-										<img width="862" height="959" src="https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/smart.jpg" alt="" srcset="https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/smart.jpg 862w, https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/smart-270x300.jpg 270w, https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/smart-768x854.jpg 768w" sizes="(max-width: 862px) 100vw, 862px" />											
+										<img width="770" height="850" src="https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/smarticon.jpg" alt="" srcset="https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/smarticon.jpg 770w, https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/smarticon-272x300.jpg 272w, https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/smarticon-768x848.jpg 768w" sizes="(max-width: 770px) 100vw, 770px" />											
 			<h3>24 Hours</h3>		
 			<h1>Maintenance</h1>		
 			<h2>Personalized customer services</h2>		
