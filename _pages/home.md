@@ -43,6 +43,13 @@ Appartments</h2>
 			<a href="#" role="button">
 						Read More
 					</a>
+			<h3>Bike Repair Stations</h3>		
+			<h2>All of our units are pet friendly</h2>		
+			<h1>we love pets.</h1>		
+			<a href="#" role="button">
+						Read More
+					</a>
+										<img width="1000" height="870" src="https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/bicycle-Station.jpg" alt="" srcset="https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/bicycle-Station.jpg 1000w, https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/bicycle-Station-300x261.jpg 300w, https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/bicycle-Station-768x668.jpg 768w" sizes="(max-width: 1000px) 100vw, 1000px" />											
 		<p>Our gallery</p>		
 			<h3>Grid Gallery Slide</h3>		
 										<img width="600" height="700" src="https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/u6.jpg" alt="" srcset="https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/u6.jpg 600w, https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/u6-257x300.jpg 257w" sizes="(max-width: 600px) 100vw, 600px" />											
