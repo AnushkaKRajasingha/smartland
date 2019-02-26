@@ -37,9 +37,9 @@ Appartments</h2>
 					</a>
 										<img width="836" height="700" src="https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/EVcar.jpg" alt="" srcset="https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/EVcar.jpg 836w, https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/EVcar-300x251.jpg 300w, https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/EVcar-768x643.jpg 768w" sizes="(max-width: 836px) 100vw, 836px" />											
 										<img width="1000" height="742" src="https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/Construction-Building.png" alt="" srcset="https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/Construction-Building.png 1000w, https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/Construction-Building-300x223.png 300w, https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/Construction-Building-768x570.png 768w" sizes="(max-width: 1000px) 100vw, 1000px" />											
-			<h3>Pet Friendly</h3>		
-			<h2>All of our units are pet friendly</h2>		
-			<h1>we love pets.</h1>		
+			<h3>24 Hours</h3>		
+			<h1>Maintenance</h1>		
+			<h2>Personalized customer services</h2>		
 			<a href="#" role="button">
 						Read More
 					</a>
