@@ -10,6 +10,7 @@ post_date: 2019-02-23 12:51:07
 ---
 <h5>Apartments & Houses</h5>		
 			<h1>SMARTLAND</h1>		
+										<img width="500" height="63" src="https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/Logo-500.png" alt="" srcset="https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/Logo-500.png 500w, https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/Logo-500-300x38.png 300w" sizes="(max-width: 500px) 100vw, 500px" />											
 			<h2>Your Home is Our Home</h2>		
 		[wre_search placeholder='Search by Keyword, City or State' submit_btn='Search' exclude='city,min_beds,min_cars' show_map="no"]		
 			<h3>Pet Friendly</h3>		
