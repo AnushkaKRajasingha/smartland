@@ -17,7 +17,7 @@ post_date: 2019-02-23 12:51:07
 			<h2>All of our units <br />
 are pet friendly</h2>		
 			<h1>we love pets.</h1>		
-			<a href="https://dev.smartland.com/apartments2/" role="button">
+			<a href="https://dev.smartland.com/apartments2/a-place-for-pets/" role="button">
 						Read More
 					</a>
 										<img width="1600" height="869" src="https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/bigstock-British-kitten-rare-color-lil-19454087.jpg" alt="" srcset="https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/bigstock-British-kitten-rare-color-lil-19454087.jpg 1600w, https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/bigstock-British-kitten-rare-color-lil-19454087-300x163.jpg 300w, https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/bigstock-British-kitten-rare-color-lil-19454087-768x417.jpg 768w, https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/bigstock-British-kitten-rare-color-lil-19454087-1024x556.jpg 1024w" sizes="(max-width: 1600px) 100vw, 1600px" />											
