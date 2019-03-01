@@ -9,8 +9,22 @@ class clsAppfoSyLoader
 {
     function __construct()
     {
+        register_activation_hook(APPFOSYDIRPATH.'/appfolio-sync.php', array($this,'appfosy_activation'));
+        register_deactivation_hook(APPFOSYDIRPATH.'/appfolio-sync.php', array($this,'appfosy_deactivation'));
+
+
+
+        require_once  'clsAppfoSyLogWriter.php';
+        require_once 'clsAppfoSyoptions.php';
+        require_once 'clsAppfoSyListings.php';
+
         add_action('wp_enqueue_scripts', array( $this, 'appfosy_scripts' ));
         add_filter('template_include', array( $this, 'get_appfosy_template' ));
+        add_filter('wp_enqueue_scripts', array( $this, 'appfosy_scripts' ));
+
+
+        $options = new clsAppfoSyoptions();
+        $listings = new clsAppfoSyListings();
     }
 
     public function appfosy_scripts()
@@ -28,10 +42,20 @@ class clsAppfoSyLoader
             'underscore'
         ));
         wp_localize_script('appfosy-scr', 'appfosy_var', array(
-            'ajaxurl' => admin_url('admin-ajax.php'),
-            'listingitem' => '<div class="listing-item" data-timestamp="{{timestamp}}"> <div class="listing-image" style="background-image: url(' . $imageloadurl . ');"> </div> <div class="listing-content"> <h3 class="listing-title"><a href="{{link}}" class="listing-title">{{title}}</a></h3> <div class="listing-content"> <span class="pub-date">Date : {{date}} | From : {{from}}</span> <div class="item-desc">{{description}}</div> </div> <a href="{{link}}" class="listing-more">read more</a> </div> </div>'
+            'ajaxurl' => admin_url('admin-ajax.php')
         ));
         wp_enqueue_style('appfosy-style', APPFOSYDIR . 'assets/style/style.css');
+    }
+
+    public function appfosy_activation(){
+        if (! wp_next_scheduled ( 'appfosy_event' )) {
+            $schedu = get_option( APPFOSYPERFIX . 'schedu' );
+            wp_schedule_event(time(), $schedu, 'appfosy_event');
+        }
+    }
+
+    public function appfosy_deactivation() {
+        wp_clear_scheduled_hook('appfosy_event');
     }
 
     function get_appfosy_template($archive_template)
@@ -43,5 +67,6 @@ class clsAppfoSyLoader
         }
         return $archive_template;
     }
+
 
 }
