@@ -57,19 +57,6 @@ Appartments</h2>
 			<a href="#" role="button">
 						Read More
 					</a>
-		<p>Our gallery</p>		
-			<h3>Grid Gallery Slide</h3>		
-										<img width="600" height="700" src="https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/u6.jpg" alt="" srcset="https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/u6.jpg 600w, https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/u6-257x300.jpg 257w" sizes="(max-width: 600px) 100vw, 600px" />											
-										<img width="600" height="700" src="https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/u5.jpg" alt="" srcset="https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/u5.jpg 600w, https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/u5-257x300.jpg 257w" sizes="(max-width: 600px) 100vw, 600px" />											
-		<p>I am text block. Click edit button to change this text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.</p>		
-										<img width="600" height="700" src="https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/u7.jpg" alt="" srcset="https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/u7.jpg 600w, https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/u7-257x300.jpg 257w" sizes="(max-width: 600px) 100vw, 600px" />											
-			<h4>Our clients</h4>		
-			<h5>Driving technology for leading brands</h5>		
-										<img width="200" height="150" src="https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/armond.png" alt="" />											
-										<img width="200" height="150" src="https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/darkside.png" alt="" />											
-										<img width="200" height="150" src="https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/bastil.png" alt="" />											
-										<img width="200" height="150" src="https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/bolier.png" alt="" />											
-										<img width="200" height="150" src="https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/digit.png" alt="" />											
 							<a href="" target="_blank" rel="noopener noreferrer">
 					Facebook
 				</a>
