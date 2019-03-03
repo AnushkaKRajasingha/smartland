@@ -25,14 +25,14 @@ are pet friendly</h2>
 			<h3>Free Ride</h3>		
 			<h2>Home on us</h2>		
 		<h3>We do not want<br />you driving home drunk<br />We PAY for your ride home</h3>		
-			<a href="#" role="button">
+			<a href="https://dev.smartland.com/apartments2/uber-home/" role="button">
 						Read More
 					</a>
 			<h3>EV Charging</h3>		
 			<h3>Stations</h3>		
 			<h2>in selected <br/>
 Appartments</h2>		
-			<a href="#" role="button">
+			<a href="https://dev.smartland.com/apartments2/ev-station/" role="button">
 						Read More
 					</a>
 										<img width="836" height="700" src="https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/EVcar.jpg" alt="" srcset="https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/EVcar.jpg 836w, https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/EVcar-300x251.jpg 300w, https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/EVcar-768x643.jpg 768w" sizes="(max-width: 836px) 100vw, 836px" />											
@@ -40,13 +40,13 @@ Appartments</h2>
 			<h3>24 Hours</h3>		
 			<h1>Maintenance</h1>		
 			<h2>Personalized customer services</h2>		
-			<a href="#" role="button">
+			<a href="https://dev.smartland.com/apartments2/24-hour-maintenance/" role="button">
 						Read More
 					</a>
 			<h3>Bike Repair Stations</h3>		
 			<h2>All of our units are pet friendly</h2>		
 			<h1>we love pets.</h1>		
-			<a href="#" role="button">
+			<a href="https://dev.smartland.com/apartments2/bike-station/" role="button">
 						Read More
 					</a>
 										<img width="1000" height="870" src="https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/bicycle-Station.jpg" alt="" srcset="https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/bicycle-Station.jpg 1000w, https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/bicycle-Station-300x261.jpg 300w, https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/bicycle-Station-768x668.jpg 768w" sizes="(max-width: 1000px) 100vw, 1000px" />											
@@ -54,7 +54,7 @@ Appartments</h2>
 			<h3>24 Hours</h3>		
 			<h1>Maintenance</h1>		
 			<h2>Personalized customer services</h2>		
-			<a href="#" role="button">
+			<a href="https://dev.smartland.com/apartments2/smart-home/" role="button">
 						Read More
 					</a>
 							<a href="" target="_blank" rel="noopener noreferrer">
