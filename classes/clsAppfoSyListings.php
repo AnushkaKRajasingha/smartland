@@ -60,7 +60,7 @@ class clsAppfoSyListings
 
                 $counter = 0 ;
                 foreach ($this->appfoliolistings as $listid => $listitem) {
-                   // $listitem[0] = new clsAppfolioListItem();
+                    //$listitem[0] = new clsAppfolioListItem();
 
                     try{
                         $post_meta = array(
@@ -77,6 +77,9 @@ class clsAppfoSyListings
                             '_wre_listing_city' => $listitem[0]->city,
                             '_wre_listing_state' => $listitem[0]->state,
                             '_wre_listing_country' => $listitem[0]->country,
+                            '_wre_listing_lat' => $listitem[0]->location_lat,
+                            '_wre_listing_lng' => $listitem[0]->location_lng,
+                            '_wre_listing_zip' => $listitem[0]->zip
 
                         );
 
@@ -122,10 +125,10 @@ class clsAppfoSyListings
     public function doappfosync(){
         try{
             $counter = $this->importAppfolioListing();
-            echo json_encode(array(
+           echo json_encode(array(
                 'Message' => $counter.' Listing(s) have been imported',
-                'Listings' => $this->appfoliolistings
-            ));
+               'Listings' => $this->appfoliolistings
+           ));
             exit(0);
         }
         catch(\Exception $e){
@@ -183,6 +186,8 @@ class clsAppfolioListItem{
     public $appearedOn; //ListingAppearedOn (datetime) - Will not be able to filter
     public $updatedOn ; // ListingUpdatedOn(datetime) - Will not be able to filter
     public $fullAddress; // Display address
+    public $location_lat; //
+    public $location_lng; //
 
     public $images;
 
@@ -241,7 +246,7 @@ class clsAppfoSyListingWrapper{
                     $listingId = str_replace($this->needle,'',$element->href,$counter);
                     $_post = $this->getPostbyListingid($listingId);
                     $listingsList_array[$listingId] = [$domain,$element->href,$counter,$_post];
-                   // if($_limit >= $this->limited) break;
+                    if($_limit >= $this->limited) break;
                     $_limit++;
                 }
             }
@@ -276,6 +281,15 @@ class clsAppfoSyListingWrapper{
         }
     }
 
+    private function extractFromAddress($address_components, $type){
+        foreach ( $address_components as $component){
+            //var_dump($component); echo '<hr/>';
+               if(in_array($type , $component->types)) return $component->long_name;
+
+        }
+        return "";
+    }
+
     public function listingDetail($listingId ,$url = '#'){
         try{
             require_once 'shmAppfosync.php';
@@ -292,6 +306,7 @@ class clsAppfoSyListingWrapper{
             //Title
             $_title = $html->find('title');
             $listItem->title = $_title[0]->innertext;
+            //echo $listItem->title;
 
             // Description
             $desc = $html->find('.listing-detail p.listing-detail__description');
@@ -304,16 +319,30 @@ class clsAppfoSyListingWrapper{
             }
 
             // Address
-            $address = explode(",",$listItem->title);
+            $address = $listItem->title;
 
-            $listItem->fullAddress = $listItem->title;
-            $listItem->addressLine1 = trim(substr($address[0], 0,strpos($address[0]," ")));
-            $listItem->addressLine2 = trim(substr($address[0],strpos($address[0]," ")));
-            $listItem->city = count($address) > 3 ? trim($address[2]) :  trim($address[1]);
-            $address[1] = explode("");
-            $address = explode(" ",$address[2]);
-            $listItem->state = $address[1];
-            $listItem->zip = $address[2];
+            $gapi_key = get_option( APPFOSYPERFIX . 'gapi' );
+
+            $prepAddr = str_replace(' ','+',$address);
+            $geocode=file_get_contents('https://maps.google.com/maps/api/geocode/json?key='.$gapi_key.'&address='.$prepAddr);
+            //echo $geocode;
+            $address = json_decode($geocode);
+
+
+            $listItem->fullAddress = $address->results[0]->formatted_address;
+
+            $listItem->addressLine1 =  $this->extractFromAddress($address->results[0]->address_components,'street_number')." ";
+            $listItem->addressLine1 .=  $this->extractFromAddress($address->results[0]->address_components,'route')." ";
+            $listItem->addressLine1 .=  $this->extractFromAddress($address->results[0]->address_components,'subpremise');
+            $listItem->addressLine2 = $this->extractFromAddress($address->results[0]->address_components,'locality')." ";
+            $listItem->city = $this->extractFromAddress($address->results[0]->address_components,'locality')." ";
+
+            $listItem->state = $this->extractFromAddress($address->results[0]->address_components,'administrative_area_level_1');
+            $listItem->zip = $this->extractFromAddress($address->results[0]->address_components,'postal_code');
+            $listItem->country =  $this->extractFromAddress($address->results[0]->address_components,'country');
+
+            $listItem->location_lat = $address->results[0]->geometry->location->lat;
+            $listItem->location_lng = $address->results[0]->geometry->location->lng;
 
             // maplink
             $maplink = $html->find('a.header__title__map-link');

@@ -141,6 +141,29 @@ class clsAppfoSyoptions
                 'type' => 'closetab',
             ),
 
+
+            // open tab: WP real estate plugin google map related
+            array(
+                'type' => 'opentab',
+                'name' => __( 'Google API Settings', APPFOSYTD ),
+            ),
+
+            // Text field
+            array(
+                'id'       => 'gapi',
+                'type'    => 'text',
+                'default' => '0',
+                'name'    => __( 'Google Api', APPFOSYTD ),
+                'desc'    => __( 'Google API key to validate address while importing listings.', APPFOSYTD ),
+            ),
+
+
+            // Close tab: WP real estate plugin related
+            array(
+                'type' => 'closetab',
+            ),
+
+
         );
 
         // Add top-level menu (like Dashboard -> Comments)
