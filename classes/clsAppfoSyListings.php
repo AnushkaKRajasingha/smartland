@@ -250,7 +250,7 @@ class clsAppfoSyListingWrapper{
                     $listingId = str_replace($this->needle,'',$element->href,$counter);
                     $_post = $this->getPostbyListingid($listingId);
                     $listingsList_array[$listingId] = [$domain,$element->href,$counter,$_post];
-                    if($_limit >= $this->limited) break;
+                  //  if($_limit >= $this->limited) break;
                     $_limit++;
                 }
             }
