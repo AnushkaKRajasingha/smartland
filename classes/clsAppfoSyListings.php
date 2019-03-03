@@ -83,12 +83,14 @@ class clsAppfoSyListings
 
                         );
 
+                        $tags = $listitem[0]->propertyType == 'House' ? array($listing_tag_house_id) : array($listing_tag_unit_id);
+
                         $wp_appfo_post = array(
                             'post_content' => $listitem[0]->description,
                             'post_title' => $listitem[0]->title,
                             'post_status' => 'publish',
                             'post_type' => $listing_posttype,
-                            'tags_input' => $listitem[0]->propertyType == 'House' ? array($listing_tag_house_id) : array($listing_tag_unit_id),
+                            //'tags_input' => $listitem[0]->propertyType == 'House' ? array($listing_tag_house_id) : array($listing_tag_unit_id),
                             'meta_input' => $post_meta
                         );
 
@@ -100,6 +102,8 @@ class clsAppfoSyListings
                             $listitem[0]->ID =  wp_insert_post( $wp_appfo_post );
                             $listitem[0]->createGallery();
                         }
+
+                        wp_set_post_terms( $listitem[0]->ID,$tags,'listing-type');
 
                     }
                     catch(\Exception $ee){
@@ -246,7 +250,7 @@ class clsAppfoSyListingWrapper{
                     $listingId = str_replace($this->needle,'',$element->href,$counter);
                     $_post = $this->getPostbyListingid($listingId);
                     $listingsList_array[$listingId] = [$domain,$element->href,$counter,$_post];
-                    //if($_limit >= $this->limited) break;
+                    if($_limit >= $this->limited) break;
                     $_limit++;
                 }
             }
