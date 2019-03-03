@@ -5,7 +5,7 @@ author: SmartApart
 post_excerpt: ""
 layout: page
 permalink: >
-  https://dev.smartland.com/apartments2/?page_id=210
+  https://dev.smartland.com/apartments2/a-place-for-pets/
 published: true
 post_date: 2019-02-27 01:34:04
 ---
