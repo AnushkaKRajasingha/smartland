@@ -93,7 +93,7 @@ class clsAppfoSyListings
                             '_wre_listing_lat' => $listitem[0]->location_lat,
                             '_wre_listing_lng' => $listitem[0]->location_lng,
                             '_wre_listing_zip' => $listitem[0]->zip,
-                            '_wre_listing_agent' => 1,
+                           // '_wre_listing_agent' => "1",
                             '_wre_listing_building_size' => $listitem[0]->area
 
                         );
