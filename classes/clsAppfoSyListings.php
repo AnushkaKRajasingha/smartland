@@ -65,8 +65,8 @@ class clsAppfoSyListings
                     $_appfosyncLogger = new clsAppfoSyLogWriter();
 
                     try{
-                        $username = substr($listitem[0]->agentEmail,0,strpos($listitem[0]->agentEmail,'@'));
-                        $user_id = username_exists( $username );
+                       // $username = substr($listitem[0]->agentEmail,0,strpos($listitem[0]->agentEmail,'@'));
+                       /* $user_id = username_exists( $username );
                         if ( !$user_id and email_exists($listitem[0]->agentEmail) == false ) {
                             $random_password = wp_generate_password( $length=12, $include_standard_special_chars=false );
                             $user_id = wp_create_user( $username, $random_password, $listitem[0]->agentEmail );
@@ -74,7 +74,7 @@ class clsAppfoSyListings
 
                         } else {
                             $random_password = __('User already exists.  Password inherited.');
-                        }
+                        }*/
 
                         $post_meta = array(
                             'content' => $listitem[0]->description,
@@ -93,7 +93,7 @@ class clsAppfoSyListings
                             '_wre_listing_lat' => $listitem[0]->location_lat,
                             '_wre_listing_lng' => $listitem[0]->location_lng,
                             '_wre_listing_zip' => $listitem[0]->zip,
-                            '_wre_listing_agent' => $user_id,
+                            '_wre_listing_agent' => 1,
                             '_wre_listing_building_size' => $listitem[0]->area
 
                         );
