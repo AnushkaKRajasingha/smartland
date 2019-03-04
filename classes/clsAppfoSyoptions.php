@@ -162,6 +162,26 @@ class clsAppfoSyoptions
             array(
                 'type' => 'closetab',
             ),
+            // open tab: WP real estate plugin google map related
+            array(
+                'type' => 'opentab',
+                'name' => __( 'Developer Settings', APPFOSYTD ),
+            ),
+
+            // Text field
+            array(
+                'id'       => 'limit',
+                'type'    => 'text',
+                'default' => '0',
+                'name'    => __( 'Maximum Number of records', APPFOSYTD ),
+                'desc'    => __( 'Maximum number of records to import at once.', APPFOSYTD ),
+            ),
+
+
+            // Close tab: WP real estate plugin related
+            array(
+                'type' => 'closetab',
+            ),
 
 
         );

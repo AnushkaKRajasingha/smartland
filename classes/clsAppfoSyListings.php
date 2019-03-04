@@ -12,27 +12,27 @@ class clsAppfoSyListings
     public $appfoliolistings;
     function __construct()
     {
-    try{
-        $this->wrapper = new clsAppfoSyListingWrapper();
-        $this->appfoliolistings = array();
-        add_action("wp_ajax_doappfosync", array(
-            $this,
-            "doappfosync"
-        ));
-        add_action("wp_ajax_doappfosyncsingle", array(
-            $this,
-            "doappfosyncsingle"
-        ));
+        try{
+            $this->wrapper = new clsAppfoSyListingWrapper();
+            $this->appfoliolistings = array();
+            add_action("wp_ajax_doappfosync", array(
+                $this,
+                "doappfosync"
+            ));
+            add_action("wp_ajax_doappfosyncsingle", array(
+                $this,
+                "doappfosyncsingle"
+            ));
 
-        add_action('appfosy_event', array(
-            $this,
-            "doappfosync"
-        ));
-    }
-    catch(\Exception $e){
-        $_appfosyncLogger = new clsAppfoSyLogWriter();
-        $_appfosyncLogger->warning($e->getMessage());
-    }
+            add_action('appfosy_event', array(
+                $this,
+                "doappfosync"
+            ));
+        }
+        catch(\Exception $e){
+            $_appfosyncLogger = new clsAppfoSyLogWriter();
+            $_appfosyncLogger->warning($e->getMessage());
+        }
 
     }
 
@@ -94,9 +94,13 @@ class clsAppfoSyListings
                             'meta_input' => $post_meta
                         );
 
+
+                        $insups = 'inserted';
                         if($listitem[1]){
                             $wp_appfo_post['ID'] = $listitem[1]->ID;// var_dump($wp_appfo_post);
                             $listitem[0]->ID =  wp_update_post( $wp_appfo_post );
+                            $insups = 'updated';
+                            $listitem[0]->createGallery();
                         }
                         else{
                             $listitem[0]->ID =  wp_insert_post( $wp_appfo_post );
@@ -104,6 +108,11 @@ class clsAppfoSyListings
                         }
 
                         wp_set_post_terms( $listitem[0]->ID,$tags,'listing-type');
+
+
+
+                        $_appfosyncLogger = new clsAppfoSyLogWriter();
+                        $_appfosyncLogger->info('Listing has been '.$insups.' with the post id '.$listitem[0]->ID  .' and appfolio ref :'.$listid  );
 
                     }
                     catch(\Exception $ee){
@@ -128,16 +137,23 @@ class clsAppfoSyListings
 
     public function doappfosync(){
         try{
+            //throw new \Exception('Developer Testing');
+
             $counter = $this->importAppfolioListing();
-           echo json_encode(array(
+            echo json_encode(array(
                 'Message' => $counter.' Listing(s) have been imported',
-               'Listings' => $this->appfoliolistings
-           ));
+                'Listings' => $this->appfoliolistings
+            ));
             exit(0);
         }
         catch(\Exception $e){
             $_appfosyncLogger = new clsAppfoSyLogWriter();
             $_appfosyncLogger->warning($e->getMessage());
+
+            echo json_encode(array(
+                'Message' => 'Error on the process "doappfosync" '.$e->getMessage(),
+            ));
+            exit(0);
         }
     }
 
@@ -193,6 +209,7 @@ class clsAppfolioListItem{
     public $location_lat; //
     public $location_lng; //
 
+
     public $images;
 
     function __construct()
@@ -200,11 +217,46 @@ class clsAppfolioListItem{
         $this->updatedOn = time();
         $this->country = 'USA';
         $this->images = array();
+
     }
 
     function createGallery(){
         try{
+            if($this->images) {
+                $_wre_listing_image_gallery = array();
+                foreach ($this->images as $image) {
 
+
+                    $response = wp_remote_get($image);
+
+                    if (!is_wp_error($response)) {
+                        $bits = wp_remote_retrieve_body($response);
+
+                        $name_arr = explode("/", $image);
+                        $filename = $name_arr[5] . $name_arr[6];
+                        // $filename = strtotime("now").'_'.uniqid().'.jpg';
+
+                        $upload = wp_upload_bits($filename, null, $bits);
+                        $data['guid'] = $upload['url'];
+                        $data['post_mime_type'] = 'image/jpeg';
+                        $attach_id = wp_insert_attachment($data, $upload['file'], 0);
+                        $_wre_listing_image_gallery[$attach_id] = $upload['url'];
+                    }
+                }
+                add_post_meta($this->ID, '_wre_listing_image_gallery', $_wre_listing_image_gallery, true);
+            }
+        }
+        catch(\Exception $e){
+            $_appfosyncLogger = new clsAppfoSyLogWriter();
+            $_appfosyncLogger->warning($e->getMessage());
+        }
+    }
+
+    public function updateAttachments(){
+        try{
+                foreach($this->images as $image){
+
+                }
         }
         catch(\Exception $e){
             $_appfosyncLogger = new clsAppfoSyLogWriter();
@@ -225,7 +277,7 @@ class clsAppfoSyListingWrapper{
 
         $this->needle = '/listings/detail/';
         $this->domain = 'https://smartland.appfolio.com';
-        $this->limited = 1;
+        $this->limited = get_option( APPFOSYPERFIX . 'limit' );
 
         //$item  = $this->listingDetail("b2289c40-16be-46e0-a660-6d49a6335484");
     }
@@ -250,7 +302,7 @@ class clsAppfoSyListingWrapper{
                     $listingId = str_replace($this->needle,'',$element->href,$counter);
                     $_post = $this->getPostbyListingid($listingId);
                     $listingsList_array[$listingId] = [$domain,$element->href,$counter,$_post];
-                  //  if($_limit >= $this->limited) break;
+                    if($this->limited > 0 && $_limit >= $this->limited) break;
                     $_limit++;
                 }
             }
@@ -264,20 +316,19 @@ class clsAppfoSyListingWrapper{
     }
 
     private function getPostbyListingid($listingid){
-        try{
-            $listing_posttype = get_option( APPFOSYPERFIX . 'listing_posttype' );
-            $listing_query = new \WP_Query( array('post_type' => $listing_posttype, 'meta_query' => array( array( 'key' => '_wre_listing_mls', 'value' => $listingid ) )) );
-            if($listing_query->have_posts()){
+        try {
+            $listing_posttype = get_option(APPFOSYPERFIX . 'listing_posttype');
+            $listing_query = new \WP_Query(array('post_type' => $listing_posttype, 'meta_query' => array(array('key' => '_wre_listing_mls', 'value' => $listingid))));
+            if ($listing_query->have_posts()) {
                 global $post;
                 $listing_query->the_post();
                 $_post = $post;
                 wp_reset_postdata();
                 return $_post;
-            }
-            else{
+            } else {
                 return false;
             }
-            wp_reset_postdata();
+
         }
         catch (\Exception $e){
             $_appfosyncLogger = new clsAppfoSyLogWriter();
@@ -288,7 +339,7 @@ class clsAppfoSyListingWrapper{
     private function extractFromAddress($address_components, $type){
         foreach ( $address_components as $component){
             //var_dump($component); echo '<hr/>';
-               if(in_array($type , $component->types)) return $component->long_name;
+            if(in_array($type , $component->types)) return $component->long_name;
 
         }
         return "";
@@ -382,15 +433,15 @@ class clsAppfoSyListingWrapper{
             $listItem->secDeposit = str_replace(",","",$amount);
             $amount = substr($listItem->description,strpos($listItem->description,"Fee: $")+6); $amount = substr($amount,0,strpos($amount," "));
             $listItem->applicationFee = str_replace(",","",$amount);
-           // $amount = $list[0]->innertext ; $amount = substr($amount,strpos($amount,"$")+1); $listItem->amount = str_replace(",","",$amount);
-           // $amount = $list[1]->innertext ; $amount = substr($amount,strpos($amount,"$")+1); $listItem->applicationFee = str_replace(",","",$amount);
-          //  $amount = $list[2]->innertext ; $amount = substr($amount,strpos($amount,"$")+1); $listItem->secDeposit = str_replace(",","",$amount);
+            // $amount = $list[0]->innertext ; $amount = substr($amount,strpos($amount,"$")+1); $listItem->amount = str_replace(",","",$amount);
+            // $amount = $list[1]->innertext ; $amount = substr($amount,strpos($amount,"$")+1); $listItem->applicationFee = str_replace(",","",$amount);
+            //  $amount = $list[2]->innertext ; $amount = substr($amount,strpos($amount,"$")+1); $listItem->secDeposit = str_replace(",","",$amount);
 
             // pet policy
             $list = $html->find('div.grid > div.grid__large-6.grid__medium-6.grid__small-12 li.list__item.js-pet-policy-item');
             $listItem->petAllowed = array();
             foreach ($list as $item){
-              array_push($listItem->petAllowed,$item->innertext);
+                array_push($listItem->petAllowed,$item->innertext);
             }
 
             // applynow url
@@ -404,12 +455,13 @@ class clsAppfoSyListingWrapper{
             $listItem->agentEmail = trim(substr($agent,strpos($agent,"| ")+2));
 
             // Images
-            $_images = $html->find('img.gallery__small-image');
+           // $_images = $html->find('img[src$="/medium.jpg"].gallery__small-image'); //a[href$="large.jpg"].swipebox
+            $_images = $html->find('a[href$="large.jpg"].swipebox');
             foreach($_images as $image){
-                $listItem->images[] = $image->src;
+                $listItem->images[] = $image->href;
             }
 
-           return $listItem;
+            return $listItem;
 
         }
         catch (\Exception $e){
@@ -418,5 +470,7 @@ class clsAppfoSyListingWrapper{
         }
 
     }
+
+
 
 }
