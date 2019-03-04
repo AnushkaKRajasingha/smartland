@@ -62,7 +62,20 @@ class clsAppfoSyListings
                 foreach ($this->appfoliolistings as $listid => $listitem) {
                     //$listitem[0] = new clsAppfolioListItem();
 
+                    $_appfosyncLogger = new clsAppfoSyLogWriter();
+
                     try{
+                        $username = substr($listitem[0]->agentEmail,0,strpos($listitem[0]->agentEmail,'@'));
+                        $user_id = username_exists( $username );
+                        if ( !$user_id and email_exists($listitem[0]->agentEmail) == false ) {
+                            $random_password = wp_generate_password( $length=12, $include_standard_special_chars=false );
+                            $user_id = wp_create_user( $username, $random_password, $listitem[0]->agentEmail );
+                            update_user_meta($user_id,'first_name',$listitem[0]->agentName);
+
+                        } else {
+                            $random_password = __('User already exists.  Password inherited.');
+                        }
+
                         $post_meta = array(
                             'content' => $listitem[0]->description,
                             '_wre_listing_mls' => $listid,
@@ -79,7 +92,9 @@ class clsAppfoSyListings
                             '_wre_listing_country' => $listitem[0]->country,
                             '_wre_listing_lat' => $listitem[0]->location_lat,
                             '_wre_listing_lng' => $listitem[0]->location_lng,
-                            '_wre_listing_zip' => $listitem[0]->zip
+                            '_wre_listing_zip' => $listitem[0]->zip,
+                            '_wre_listing_agent' => $user_id,
+                            '_wre_listing_building_size' => $listitem[0]->area
 
                         );
 
@@ -111,7 +126,8 @@ class clsAppfoSyListings
 
 
 
-                        $_appfosyncLogger = new clsAppfoSyLogWriter();
+
+
                         $_appfosyncLogger->info('Listing has been '.$insups.' with the post id '.$listitem[0]->ID  .' and appfolio ref :'.$listid  );
 
                     }
@@ -159,14 +175,22 @@ class clsAppfoSyListings
 
     public function doappfosyncsingle(){
         try{
-            $id = 'b2289c40-16be-46e0-a660-6d49a6335484';
+                if(isset($_GET['lid'])) {
+                    $id = $_GET['lid'];
 
-            $item =  $this->wrapper->listingDetail($id);
+                    $item = $this->wrapper->listingDetail($id);
 
-            echo json_encode(array(
-                'Message' => 'testing doappfosyncsingle',
-                'ListingItem' => $item
-            ));
+                    echo json_encode(array(
+                        'ListingItem' => $item
+                    ));
+
+                }
+                else{
+                    echo json_encode(array(
+                        'Message' => 'Invalid id'
+                    ));
+
+                }
             exit(0);
         }
         catch(\Exception $e){
@@ -240,7 +264,7 @@ class clsAppfolioListItem{
                         $data['guid'] = $upload['url'];
                         $data['post_mime_type'] = 'image/jpeg';
                         $attach_id = wp_insert_attachment($data, $upload['file'], 0);
-                        $_wre_listing_image_gallery[$attach_id] = $upload['url'];
+                        $_wre_listing_image_gallery[$attach_id] =  $upload['url'];
                     }
                 }
                 add_post_meta($this->ID, '_wre_listing_image_gallery', $_wre_listing_image_gallery, true);
@@ -423,19 +447,36 @@ class clsAppfoSyListingWrapper{
             $listItem->status = trim(substr($header__summary[0]->innertext,strpos($header__summary[0]->innertext,"| ")+2));
 
             // Amount
-            //$list = $html->find('div.grid > div.grid__large-6 li.list__item');
-            //foreach ($list as $it){  echo '<pre>';
-            //    var_dump($it->innertext);
-            //   echo '</pre>';}
-            $amount = substr($listItem->description,strpos($listItem->description,"Rent: $")+7); $amount = substr($amount,0,strpos($amount,"/mo")-3);
-            $listItem->amount = str_replace(",","",$amount);
-            $amount = substr($listItem->description,strpos($listItem->description,"Deposit: $")+10); $amount = substr($amount,0,strpos($amount," "));
-            $listItem->secDeposit = str_replace(",","",$amount);
-            $amount = substr($listItem->description,strpos($listItem->description,"Fee: $")+6); $amount = substr($amount,0,strpos($amount," "));
-            $listItem->applicationFee = str_replace(",","",$amount);
-            // $amount = $list[0]->innertext ; $amount = substr($amount,strpos($amount,"$")+1); $listItem->amount = str_replace(",","",$amount);
-            // $amount = $list[1]->innertext ; $amount = substr($amount,strpos($amount,"$")+1); $listItem->applicationFee = str_replace(",","",$amount);
-            //  $amount = $list[2]->innertext ; $amount = substr($amount,strpos($amount,"$")+1); $listItem->secDeposit = str_replace(",","",$amount);
+            $list = $html->find('h3.listing-detail__list-header ~ ul.list');
+            foreach ($list[0]->children as $it){
+                $_start = strpos($it->innertext,'$');
+                $_length = strlen($it->innertext);
+                if(strpos($it->innertext,"Rent: $")!== false){ $listItem->amount =  substr($it->innertext,$_start+1,$_length - $_start) ; }
+                if(strpos($it->innertext,"Application Fee: $")!== false){ $listItem->applicationFee =  substr($it->innertext,$_start+1,$_length - $_start) ; }
+                if(strpos($it->innertext,"Security Deposit: $")!== false){ $listItem->secDeposit =  substr($it->innertext,$_start+1,$_length - $_start) ; }
+            }
+            if(!$listItem->amount){
+                foreach ($list[1]->children as $it){
+                    $_start = strpos($it->innertext,'$');
+                    $_length = strlen($it->innertext);
+                    if(strpos($it->innertext,"Rent: $")!== false){ $listItem->amount =  substr($it->innertext,$_start+1,$_length - $_start) ; }
+                    if(strpos($it->innertext,"Application Fee: $")!== false){ $listItem->applicationFee =  substr($it->innertext,$_start+1,$_length - $_start) ; }
+                    if(strpos($it->innertext,"Security Deposit: $")!== false){ $listItem->secDeposit =  substr($it->innertext,$_start+1,$_length - $_start) ; }
+                }
+
+
+
+                $listItem->description .= '<h3>Amenities</h3><ul class="amanties">'.$list[0]->innertext .'</ul><h3>Rental Terms</h3><ul class="pet-policy">'. $list[1]->innertext.'</ul><h3>Pet Policy</h3><ul class="pet-policy">'. $list[2]->innertext.'</ul>';
+            }else{
+                $listItem->description .= '<h3>Rental Terms</h3><ul class="pet-policy">'. $list[0]->innertext.'</ul><h3>Pet Policy</h3><ul class="pet-policy">'. $list[1]->innertext.'</ul>';
+            }
+
+            $listItem->amount = str_replace(",","",$listItem->amount);
+            $listItem->applicationFee = str_replace(",","" ,$listItem->applicationFee);
+            $listItem->secDeposit = str_replace(",","",$listItem->secDeposit);
+
+            $listItem->description .=  '<a href="https://smartland.appfolio.com/listings/rental_applications/new?listable_uid='.$listItem->listingId.'&source=Website" class="btn btn-primary button">Apply Now</a>';
+
 
             // pet policy
             $list = $html->find('div.grid > div.grid__large-6.grid__medium-6.grid__small-12 li.list__item.js-pet-policy-item');
@@ -455,11 +496,21 @@ class clsAppfoSyListingWrapper{
             $listItem->agentEmail = trim(substr($agent,strpos($agent,"| ")+2));
 
             // Images
-           // $_images = $html->find('img[src$="/medium.jpg"].gallery__small-image'); //a[href$="large.jpg"].swipebox
-            $_images = $html->find('a[href$="large.jpg"].swipebox');
-            foreach($_images as $image){
-                $listItem->images[] = $image->href;
+            $lowres = $listing_posttype = get_option(APPFOSYPERFIX . 'lowres');
+            if($lowres) {
+                $_images = $html->find('img[src$="/medium.jpg"].gallery__small-image'); //a[href$="large.jpg"].swipebox
+                foreach($_images as $image){
+                    $listItem->images[] = $image->src;
+                }
+            }else {
+                $_images = $html->find('a[href$="large.jpg"].swipebox');
+                foreach ($_images as $image) {
+                    $listItem->images[] = $image->href;
+                }
             }
+
+            $html->clear();
+            unset($html);
 
             return $listItem;
 

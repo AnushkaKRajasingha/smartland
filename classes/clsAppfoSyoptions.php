@@ -176,6 +176,14 @@ class clsAppfoSyoptions
                 'name'    => __( 'Maximum Number of records', APPFOSYTD ),
                 'desc'    => __( 'Maximum number of records to import at once.', APPFOSYTD ),
             ),
+            array(
+                'id'       => 'lowres',
+                'type'    => 'checkbox',
+                'default' => '0',
+                'label' => '',
+                'name'    => __( 'Use low-res images', APPFOSYTD ),
+                'desc'    => __( 'Use low resolution images to import.', APPFOSYTD ),
+            ),
 
 
             // Close tab: WP real estate plugin related
