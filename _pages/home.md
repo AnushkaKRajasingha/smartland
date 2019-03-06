@@ -31,7 +31,7 @@ are pet friendly</h2>
 			<h3>EV Charging</h3>		
 			<h3>Stations</h3>		
 			<h2>in selected <br/>
-Appartments</h2>		
+Apartments</h2>		
 			<a href="https://dev.smartland.com/apartments2/ev-station/" role="button">
 						Read More
 					</a>
