@@ -16,11 +16,15 @@ post_date: 2019-02-26 12:43:56
 			<a href="https://smartland.appfolio.com/connect" target="_blank" role="button" rel="noopener noreferrer">
 						Login
 					</a>
-			<h3>Submit a Maintenance Request</h3>		
-		<p>Please log into your Tenant Portal to submit your maintenance request. Note that requests are reviewed Monday through Friday from 9:00 a.m. to 5:00 p.m., except for holidays.</p>		
+			<h3>Pay Your Rent Online</h3>		
+		<p>Did you know that you can now pay your rent online? It's fast, easy, and secure, so why wait? Below, you'll find some information on how to get started and a few reasons why so many others have already made the switch!</p>		
+			<h3>Don't have an account?</h3>		
+		<p>It's easy! Just let us know you want to pay your rent online and we'll email you an account activation link.</p>		
 			<a href="https://smartland.appfolio.com/connect" target="_blank" role="button" rel="noopener noreferrer">
-						Login
+						Get Started
 					</a>
+			<h3>Already have an account?</h3>		
+		<p>Click the button below to be taken to the Tenant Portal login page.</p>		
 			<a href="https://smartland.appfolio.com/connect" target="_blank" role="button" rel="noopener noreferrer">
 						Login
 					</a>
