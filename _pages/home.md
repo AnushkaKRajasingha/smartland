@@ -44,16 +44,16 @@ Appartments</h2>
 						Read More
 					</a>
 			<h3>Bike Repair Stations</h3>		
-			<h2>All of our units are pet friendly</h2>		
-			<h1>we love pets.</h1>		
+			<h2>Secure bicycle stations</h2>		
+			<h1>Stay Healthy</h1>		
 			<a href="https://dev.smartland.com/apartments2/bike-station/" role="button">
 						Read More
 					</a>
 										<img width="1000" height="870" src="https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/bicycle-Station.jpg" alt="" srcset="https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/bicycle-Station.jpg 1000w, https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/bicycle-Station-300x261.jpg 300w, https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/bicycle-Station-768x668.jpg 768w" sizes="(max-width: 1000px) 100vw, 1000px" />											
 										<img width="770" height="850" src="https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/smartIcon4.jpg" alt="" srcset="https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/smartIcon4.jpg 770w, https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/smartIcon4-272x300.jpg 272w, https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/smartIcon4-768x848.jpg 768w" sizes="(max-width: 770px) 100vw, 770px" />											
-			<h3>24 Hours</h3>		
-			<h1>Maintenance</h1>		
-			<h2>Personalized customer services</h2>		
+			<h3>Smart  Living</h3>		
+			<h2>Home automation</h2>		
+			<h1>At your fingertips!</h1>		
 			<a href="https://dev.smartland.com/apartments2/smart-home/" role="button">
 						Read More
 					</a>
