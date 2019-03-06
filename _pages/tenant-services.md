@@ -20,7 +20,7 @@ post_date: 2019-02-26 12:43:56
 		<p>Did you know that you can now pay your rent online? It's fast, easy, and secure, so why wait? Below, you'll find some information on how to get started and a few reasons why so many others have already made the switch!</p>		
 			<h3>Don't have an account?</h3>		
 		<p>It's easy! Just let us know you want to pay your rent online and we'll email you an account activation link.</p>		
-			<a href="https://smartland.appfolio.com/connect" target="_blank" role="button" rel="noopener noreferrer">
+			<a href="mailto:assist@smartland.com?subject=Tenant%20ACH%20Activation%20Request" target="_blank" role="button" rel="noopener noreferrer">
 						Get Started
 					</a>
 			<h3>Already have an account?</h3>		
