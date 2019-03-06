@@ -10,7 +10,7 @@ published: true
 post_date: 2019-02-26 12:42:59
 ---
 <img width="800" height="600" src="https://dev.smartland.com/apartments2/wp-content/uploads/2019/03/e10bcc4e1ba867150863b7ee81a9fb5f-800x600.jpeg" alt="" srcset="https://dev.smartland.com/apartments2/wp-content/uploads/2019/03/e10bcc4e1ba867150863b7ee81a9fb5f-800x600.jpeg 800w, https://dev.smartland.com/apartments2/wp-content/uploads/2019/03/e10bcc4e1ba867150863b7ee81a9fb5f-400x300.jpeg 400w" sizes="(max-width: 800px) 100vw, 800px" />											
-			<h3>A place for Pets</h3>		
+			<h3>With decades of experience</h3>		
 			<h3>FULL SERVICE APARTMENT MANAGEMENT</h3>		
 		<p>At Smartland, we takes pride in the ability to offer every client the very best in:</p>		
 					<ul>
