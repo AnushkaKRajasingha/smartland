@@ -30,11 +30,26 @@ post_date: 2019-02-26 12:43:56
 					</a>
 										<img width="768" height="576" src="https://dev.smartland.com/apartments2/wp-content/uploads/2019/03/Dogs_Cats_Chow_Chow_502888_1152x864-768x576.jpg" alt="" srcset="https://dev.smartland.com/apartments2/wp-content/uploads/2019/03/Dogs_Cats_Chow_Chow_502888_1152x864-768x576.jpg 768w, https://dev.smartland.com/apartments2/wp-content/uploads/2019/03/Dogs_Cats_Chow_Chow_502888_1152x864-300x225.jpg 300w, https://dev.smartland.com/apartments2/wp-content/uploads/2019/03/Dogs_Cats_Chow_Chow_502888_1152x864-1024x768.jpg 1024w, https://dev.smartland.com/apartments2/wp-content/uploads/2019/03/Dogs_Cats_Chow_Chow_502888_1152x864-800x600.jpg 800w, https://dev.smartland.com/apartments2/wp-content/uploads/2019/03/Dogs_Cats_Chow_Chow_502888_1152x864-400x300.jpg 400w, https://dev.smartland.com/apartments2/wp-content/uploads/2019/03/Dogs_Cats_Chow_Chow_502888_1152x864.jpg 1152w" sizes="(max-width: 768px) 100vw, 768px" />											
 										<img width="768" height="476" src="https://dev.smartland.com/apartments2/wp-content/uploads/2019/03/pets-768x476.jpg" alt="" srcset="https://dev.smartland.com/apartments2/wp-content/uploads/2019/03/pets-768x476.jpg 768w, https://dev.smartland.com/apartments2/wp-content/uploads/2019/03/pets-300x186.jpg 300w, https://dev.smartland.com/apartments2/wp-content/uploads/2019/03/pets-1024x634.jpg 1024w" sizes="(max-width: 768px) 100vw, 768px" />											
-			<h4>Marketing</h4>		
-		<p>We can get your vacancies tenanted or take over where you left off. In an effort to achieve full occupancy of our buildings, our management services also include a variety of multi-channel marketing efforts to reach as many prospective tenants as possible. Once we find a perfect match, tenants must be approved by meeting our qualifications for credit score, income, and rental history verification standards.</p>		
-			<h4>Leasing</h4>		
-		<p>Once the lease has been signed, tenant accounts are then created and added to our interactive management software that allows for communication with our team members and owners as well as online rent payments and maintenance requests.</p>		
-										<img width="768" height="476" src="https://dev.smartland.com/apartments2/wp-content/uploads/2019/03/pets-768x476.jpg" alt="" srcset="https://dev.smartland.com/apartments2/wp-content/uploads/2019/03/pets-768x476.jpg 768w, https://dev.smartland.com/apartments2/wp-content/uploads/2019/03/pets-300x186.jpg 300w, https://dev.smartland.com/apartments2/wp-content/uploads/2019/03/pets-1024x634.jpg 1024w" sizes="(max-width: 768px) 100vw, 768px" />											
-										<img width="768" height="476" src="https://dev.smartland.com/apartments2/wp-content/uploads/2019/03/pets-768x476.jpg" alt="" srcset="https://dev.smartland.com/apartments2/wp-content/uploads/2019/03/pets-768x476.jpg 768w, https://dev.smartland.com/apartments2/wp-content/uploads/2019/03/pets-300x186.jpg 300w, https://dev.smartland.com/apartments2/wp-content/uploads/2019/03/pets-1024x634.jpg 1024w" sizes="(max-width: 768px) 100vw, 768px" />											
-			<h4>Maintenance</h4>		
-		<p>Unexpected maintenance needs are inevitable- for this reason our team of maintenance specialists work together to provide around-the-clock service to resolve issues involving heat, electricity, and plumbing.</p><p>Smartland maintains the highest quality standards for property management strategies as a way to increase, not only the value of the property, but the overall rental experience for residents. Call us today to learn more about the services we provide and how our company can assist you with all of your multifamily management needs.</p>
+			<h3>Marketing</h3>		
+		<p>Once you've signed up, you can:</p>		
+					<ul>
+							<li >
+										View and pay your bills anytime (24/7)
+									</li>
+								<li >
+										View and pay your bills from anywhere (any computer with an internet connection)
+									</li>
+								<li >
+										Set up an automatic payment
+									</li>
+								<li >
+										Sign up for automatic reminder emails
+									</li>
+								<li >
+										Review your payment history
+									</li>
+						</ul>
+			<h3>Convenience</h3>		
+		<p>Have you ever looked at a calendar and suddenly realized that your rent was due that day? Or worse yet, that it was due a few days ago and that it was now late? With online rent payments, these concerns are a thing of the past. Simply hop on your computer and in just a few minutes, your rent is paid! Or remove all doubt and schedule a payment in advance so your rent is paid automatically. And this is in addition to not having to write checks, address envelopes, or find/buy stamps...</p>		
+			<h3>Security</h3>		
+		<p>In a world where online financial predators seem more and more common, we understand if you have reservations about entering your bank account information online. But fear not! Your information is password protected and all transactions are both encrypted and securely transmitted</p>
