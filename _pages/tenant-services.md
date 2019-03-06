@@ -9,7 +9,7 @@ permalink: >
 published: true
 post_date: 2019-02-26 12:43:56
 ---
-<img width="800" height="600" src="https://dev.smartland.com/apartments2/wp-content/uploads/2019/03/e10bcc4e1ba867150863b7ee81a9fb5f-800x600.jpeg" alt="" srcset="https://dev.smartland.com/apartments2/wp-content/uploads/2019/03/e10bcc4e1ba867150863b7ee81a9fb5f-800x600.jpeg 800w, https://dev.smartland.com/apartments2/wp-content/uploads/2019/03/e10bcc4e1ba867150863b7ee81a9fb5f-400x300.jpeg 400w" sizes="(max-width: 800px) 100vw, 800px" />											
+<img width="800" height="600" src="https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/24hrService900-800x600.jpg" alt="" srcset="https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/24hrService900-800x600.jpg 800w, https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/24hrService900-400x300.jpg 400w" sizes="(max-width: 800px) 100vw, 800px" />											
 			<h3>TENANT SERVICES</h3>		
 			<h3>Submit a Maintenance Request</h3>		
 		<p>Please log into your Tenant Portal to submit your maintenance request. Note that requests are reviewed Monday through Friday from 9:00 a.m. to 5:00 p.m., except for holidays.</p>		
