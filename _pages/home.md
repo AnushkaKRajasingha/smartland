@@ -9,7 +9,6 @@ published: true
 post_date: 2019-02-23 12:51:07
 ---
 <h5>Apartments & Houses</h5>		
-			<h1>SMARTLAND</h1>		
 			<h2>Your Home is Our Home</h2>		
 		[wre_search placeholder='Search by Keyword, City or State' submit_btn='Search' exclude='city,min_beds,min_cars,min_price, max_price' show_map="no"]		
 			<h3>Pet Friendly</h3>		
