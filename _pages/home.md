@@ -56,12 +56,3 @@ Apartments</h2>
 			<a href="https://dev.smartland.com/apartments2/smart-home/" role="button">
 						Read More
 					</a>
-							<a href="" target="_blank" rel="noopener noreferrer">
-					Facebook
-				</a>
-							<a href="" target="_blank" rel="noopener noreferrer">
-					Twitter
-				</a>
-							<a href="" target="_blank" rel="noopener noreferrer">
-					Google-plus
-				</a>
