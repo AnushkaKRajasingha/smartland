@@ -24,7 +24,7 @@ post_date: 2019-02-26 12:43:56
 						Get Started
 					</a>
 			<h4>Already have an account?</h4>		
-		<p>Click the button below to be taken to the Tenant Portal login page.</p>		
+		<p>Click the button below to be taken to the Tenant Portal login page.</p><p> </p>		
 			<a href="https://smartland.appfolio.com/connect" target="_blank" role="button" rel="noopener noreferrer">
 						Login
 					</a>
