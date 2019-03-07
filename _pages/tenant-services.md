@@ -31,7 +31,7 @@ post_date: 2019-02-26 12:43:56
 										<img width="768" height="570" src="https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/Construction-Building-768x570.png" alt="" srcset="https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/Construction-Building-768x570.png 768w, https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/Construction-Building-300x223.png 300w, https://dev.smartland.com/apartments2/wp-content/uploads/2019/02/Construction-Building.png 1000w" sizes="(max-width: 768px) 100vw, 768px" />											
 										<img width="611" height="611" src="https://dev.smartland.com/apartments2/wp-content/uploads/2019/03/p-42900-fixit.jpg" alt="" srcset="https://dev.smartland.com/apartments2/wp-content/uploads/2019/03/p-42900-fixit.jpg 611w, https://dev.smartland.com/apartments2/wp-content/uploads/2019/03/p-42900-fixit-150x150.jpg 150w, https://dev.smartland.com/apartments2/wp-content/uploads/2019/03/p-42900-fixit-300x300.jpg 300w" sizes="(max-width: 611px) 100vw, 611px" />											
 			<h3>Marketing</h3>		
-		<p>Once you've signed up, you can:</p>		
+			<h6>Once you've signed up, you can:</h6>		
 					<ul>
 							<li >
 										View and pay your bills anytime (24/7)
