@@ -64,3 +64,9 @@ This section describes how to install the plugin and get it working.
 
 = 1.0 =
 * Initial release
+= 1.0.1=
+* Version upgrade
+* Agent imported to the system as a wp user.
+* Image Url validation with regex
+* Listing Url validation with regex
+* Facilitate to show or hide agent details on import

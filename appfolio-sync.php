@@ -3,7 +3,7 @@ namespace appfoliosync;
 /*
   Plugin Name: Appfolio Sync
   Plugin URI: https://wordpress.org/plugins/appfolio-sync/
-  Version: 1.0.0
+  Version: 1.0.1
   Description: Appfolio listing Synchronisation Plugin  | <a href="#">Documentation</a>
   Author: oprone
   Author URI: http://www.oprone.com/
@@ -41,10 +41,10 @@ if(!defined('APPFOSYDIRPATH')){
 
 require_once 'classes/clsAppfoSyLoader.php';
 
-
-/**
- * Initialize plugin
- */
+-
+    /**
+     * Initialize plugin
+     */
 
 
 $_appfosync = new clsAppfoSyLoader();

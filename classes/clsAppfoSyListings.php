@@ -57,6 +57,9 @@ class clsAppfoSyListings
                 $listing_posttype = get_option( APPFOSYPERFIX . 'listing_posttype' );
                 $listing_tag_house_id = get_option( APPFOSYPERFIX . 'house_catid' );
                 $listing_tag_unit_id = get_option( APPFOSYPERFIX . 'unit_catid' );
+                $agentasuser = get_option( APPFOSYPERFIX . 'agentasuser' );//agentasuser
+                $agentasusershow = get_option( APPFOSYPERFIX . 'agentasusershow' );//agentasusershow
+                $_admin_user_id = $this->admin_user_ids();
 
                 $counter = 0 ;
                 foreach ($this->appfoliolistings as $listid => $listitem) {
@@ -65,16 +68,24 @@ class clsAppfoSyListings
                     $_appfosyncLogger = new clsAppfoSyLogWriter();
 
                     try{
-                        // $username = substr($listitem[0]->agentEmail,0,strpos($listitem[0]->agentEmail,'@'));
-                        /* $user_id = username_exists( $username );
-                         if ( !$user_id and email_exists($listitem[0]->agentEmail) == false ) {
-                             $random_password = wp_generate_password( $length=12, $include_standard_special_chars=false );
-                             $user_id = wp_create_user( $username, $random_password, $listitem[0]->agentEmail );
-                             update_user_meta($user_id,'first_name',$listitem[0]->agentName);
+                        if($agentasuser) {
+                             $username = substr($listitem[0]->agentEmail,0,strpos($listitem[0]->agentEmail,'@'));
+                             $user_id = username_exists( $username );
+                             if ( !$user_id and email_exists($listitem[0]->agentEmail) == false ) {
+                                 $random_password = wp_generate_password( $length=12, $include_standard_special_chars=false );
+                                 $user_id = wp_create_user( $username, $random_password, $listitem[0]->agentEmail );
+                                 update_user_meta($user_id,'first_name',$listitem[0]->agentName);
+                                 update_user_meta($user_id,'role','wre_agent');
+                                 update_user_meta($user_id,'phone',$listitem[0]->agentPhone);
+                                 //update_user_meta($user_id,'mobile',$listitem[0]->agentPhone);
+                                 $user = new \WP_User($user_id);
+                                 $user->add_role('wre_agent');
+                                 $_admin_user_id[0] = $user_id;
 
-                         } else {
-                             $random_password = __('User already exists.  Password inherited.');
-                         }*/
+                             } else {
+                                 $random_password = __('User already exists.  Password inherited.');
+                             }
+                        }
 
                         $post_meta = array(
                             'content' => $listitem[0]->description,
@@ -93,8 +104,10 @@ class clsAppfoSyListings
                             '_wre_listing_lat' => $listitem[0]->location_lat,
                             '_wre_listing_lng' => $listitem[0]->location_lng,
                             '_wre_listing_zip' => $listitem[0]->zip,
-                            // '_wre_listing_agent' => "1",
-                            '_wre_listing_building_size' => $listitem[0]->area
+                            '_wre_listing_agent' => $_admin_user_id[0],
+                            '_wre_listing_hide' => ($agentasusershow == true) ? array() : array('4' => 'contact_form','5' => 'agent'),
+                            '_wre_listing_building_size' => $listitem[0]->area,
+                            '_wre_listing_image_gallery' => array()
 
                         );
 
@@ -124,16 +137,13 @@ class clsAppfoSyListings
 
                         wp_set_post_terms( $listitem[0]->ID,$tags,'listing-type');
 
-
-
-
-
                         $_appfosyncLogger->info('Listing has been '.$insups.' with the post id '.$listitem[0]->ID  .' and appfolio ref :'.$listid  );
 
                     }
                     catch(\Exception $ee){
                         $_appfosyncLogger = new clsAppfoSyLogWriter();
                         $_appfosyncLogger->warning($ee->getMessage());
+                        $_appfosyncLogger->emailNotification('Updating record in wordpress with '.$listid.' was unsuccessfull.');
                     }
                     $counter++;
                 }
@@ -150,6 +160,32 @@ class clsAppfoSyListings
             $_appfosyncLogger->warning($e->getMessage());
         }
     }
+
+    function admin_user_ids(){
+        //Grab wp DB
+        global $wpdb;
+        //Get all users in the DB
+        $wp_user_search = $wpdb->get_results("SELECT ID, display_name FROM $wpdb->users ORDER BY ID");
+
+        //Blank array
+        $adminArray = array();
+        //Loop through all users
+        foreach ( $wp_user_search as $userid ) {
+            //Current user ID we are looping through
+            $curID = $userid->ID;
+            //Grab the user info of current ID
+            $curuser = get_userdata($curID);
+            //Current user level
+            $user_level = $curuser->user_level;
+            //Only look for admins
+            if($user_level >= 8){//levels 8, 9 and 10 are admin
+                //Push user ID into array
+                $adminArray[] = $curID;
+            }
+        }
+        return $adminArray;
+    }
+
 
     public function doappfosync(){
         try{
@@ -169,28 +205,29 @@ class clsAppfoSyListings
             echo json_encode(array(
                 'Message' => 'Error on the process "doappfosync" '.$e->getMessage(),
             ));
+
             exit(0);
         }
     }
 
     public function doappfosyncsingle(){
         try{
-            if(isset($_GET['lid'])) {
-                $id = $_GET['lid'];
+                if(isset($_GET['lid'])) {
+                    $id = $_GET['lid'];
 
-                $item = $this->wrapper->listingDetail($id);
+                    $item = $this->wrapper->listingDetail($id);
 
-                echo json_encode(array(
-                    'ListingItem' => $item
-                ));
+                    echo json_encode(array(
+                        'ListingItem' => $item
+                    ));
 
-            }
-            else{
-                echo json_encode(array(
-                    'Message' => 'Invalid id'
-                ));
+                }
+                else{
+                    echo json_encode(array(
+                        'Message' => 'Invalid id'
+                    ));
 
-            }
+                }
             exit(0);
         }
         catch(\Exception $e){
@@ -244,31 +281,13 @@ class clsAppfolioListItem{
 
     }
 
-    function createGallery(){
+    function attachmentExists($guid){
         try{
-            if($this->images) {
-                $_wre_listing_image_gallery = array();
-                foreach ($this->images as $image) {
-
-
-                    $response = wp_remote_get($image);
-
-                    if (!is_wp_error($response)) {
-                        $bits = wp_remote_retrieve_body($response);
-
-                        $name_arr = explode("/", $image);
-                        $filename = $name_arr[5] . $name_arr[6];
-                        // $filename = strtotime("now").'_'.uniqid().'.jpg';
-
-                        $upload = wp_upload_bits($filename, null, $bits);
-                        $data['guid'] = $upload['url'];
-                        $data['post_mime_type'] = 'image/jpeg';
-                        $attach_id = wp_insert_attachment($data, $upload['file'], 0);
-                        $_wre_listing_image_gallery[$attach_id] =  $upload['url'];
-                    }
-                }
-                add_post_meta($this->ID, '_wre_listing_image_gallery', $_wre_listing_image_gallery, true);
-            }
+            global $wpdb;
+            $attachment = $wpdb->get_row($wpdb->prepare("SELECT ID,guid FROM $wpdb->posts WHERE post_parent = %d and guid = %s ;",array($this->ID , $guid) ));
+           //echo $wpdb->last_query.'<br/>';// var_dump($attachment);
+            if(count($attachment) <= 0) return false;
+            return $attachment;
         }
         catch(\Exception $e){
             $_appfosyncLogger = new clsAppfoSyLogWriter();
@@ -276,11 +295,81 @@ class clsAppfolioListItem{
         }
     }
 
+    function createGallery(){
+        $_appfosyncLogger = new clsAppfoSyLogWriter();
+        try{
+            if($this->images) {
+                $_wre_listing_image_gallery = array();
+                foreach ($this->images as $image) {
+                    $name_arr = explode("/", $image);
+                    $filename = $name_arr[5] .   $name_arr[6];
+
+                    $upload_dir   = wp_upload_dir();
+
+
+                    $attachment_count = count($_wre_listing_image_gallery)+1;
+                    $file_shortname = 'Listing-'.$this->ID.'-image-'.$attachment_count;
+
+                    $attachment = $this->attachmentExists($upload_dir['url'].'/'.$filename);
+                    if($attachment) {
+                        if(!empty($attachment->guid) && $attachment->guid != null) {
+                            //echo $attachment->guid .'<br/>';
+                            $_wre_listing_image_gallery[$attachment->ID] = $attachment->guid;
+                            $_appfosyncLogger->info('Updated media file  - ' . $filename);
+                        }
+                    }
+                    else {
+                        $response = wp_remote_get($image);
+                        if (!is_wp_error($response)) {
+                            $bits = wp_remote_retrieve_body($response);
+
+
+                            // $filename = strtotime("now").'_'.uniqid().'.jpg';
+
+                            $upload = wp_upload_bits($filename, null, $bits);
+                            $data['guid'] = $upload['url'];
+                            $data['post_mime_type'] = 'image/jpeg';
+                            $data['post_title'] = $file_shortname;
+
+                            require_once(ABSPATH . 'wp-admin/includes/image.php');
+
+                            $attach_id = wp_insert_attachment($data, $upload['file'], $this->ID);
+
+                            $attach_data = wp_generate_attachment_metadata($attach_id, $filename);
+                            wp_update_attachment_metadata($attach_id, $attach_data);
+
+                            //if ($attachment_count == 1) set_post_thumbnail($this->ID, $attach_id);
+
+                            $_appfosyncLogger->info('New media file added - '. $filename );
+                        }
+                    }
+
+                    $_wre_listing_image_gallery[$attach_id] =  $upload['url'];
+
+                }
+                $_wre_listing_image_gallery = array_filter($_wre_listing_image_gallery,array($this,'sanitizearray'),ARRAY_FILTER_USE_BOTH);
+/*                echo '<pre>';
+                var_dump($_wre_listing_image_gallery);
+                echo '</pre>';*/
+                delete_post_meta($this->ID, '_wre_listing_image_gallery');
+                add_post_meta($this->ID, '_wre_listing_image_gallery', $_wre_listing_image_gallery);
+            }
+        }
+        catch(\Exception $e){
+
+            $_appfosyncLogger->warning($e->getMessage());
+        }
+    }
+
+    function sanitizearray($key,$value){
+        return !empty($key) && preg_match('/[^?]*\.(jpg|jpeg|gif|png)/',$key);
+    }
+
     public function updateAttachments(){
         try{
-            foreach($this->images as $image){
+                foreach($this->images as $image){
 
-            }
+                }
         }
         catch(\Exception $e){
             $_appfosyncLogger = new clsAppfoSyLogWriter();
@@ -309,18 +398,37 @@ class clsAppfoSyListingWrapper{
 
     public function scrapeListingList(){
         try{
-            require_once 'shmAppfosync.php';
+
+            $listingsList_array = array();
+            $counter = 0; $_limit = 1;
+
             $listingUrl = get_option( APPFOSYPERFIX . 'listing_url' );
 
-            if($listingUrl === '#') { throw new \Exception(get_option( 'invalid URL - '.$listingUrl )); exit();}
+            //Validating listing url
+            if($listingUrl === '#' || !preg_match("/(http[s]?:\/\/)?[^\s([\"<,>]*\.[^\s[\",><]*/",$listingUrl)) { throw new \Exception( 'invalid URL - '.$listingUrl ); exit();}
 
-            $html   = file_get_html($listingUrl);
             $result = parse_url($listingUrl);
             $domain = $result['scheme'] . "://" . $result['host'];
 
+            if((isset($_POST['lid']) && !empty($_POST['lid'])) ||  (isset($_GET['lid']) && !empty($_GET['lid']))){
+
+
+                $_listingid = (isset($_POST['lid']) && !empty($_POST['lid'])) ? $_POST['lid'] : $_GET['lid'];
+                $_post = $this->getPostbyListingid($_listingid);
+
+                $listingsList_array[$_listingid] = [$domain,$this->needle.$_listingid,1,$_post];
+
+                return$listingsList_array;
+            }
+
+
+            require_once 'shmAppfosync.php';
+
+            $html   = file_get_html($listingUrl);
+
             $listingsList = $html->find('a.btn.js-link-to-detail[href^="'.$this->needle.'"]');
-            $listingsList_array = array();
-            $counter = 0; $_limit = 1;
+
+
             if ($listingsList) {
                 foreach ($listingsList as $element) {
                     $listingId = str_replace($this->needle,'',$element->href,$counter);
@@ -336,6 +444,7 @@ class clsAppfoSyListingWrapper{
         catch (\Exception $e){
             $_appfosyncLogger = new clsAppfoSyLogWriter();
             $_appfosyncLogger->warning($e->getMessage());
+            $_appfosyncLogger->emailNotification('Scraping the listing from '.$listingUrl.' was unsuccessfull.');
         }
     }
 
@@ -471,6 +580,30 @@ class clsAppfoSyListingWrapper{
                 $listItem->description .= '<h3>Rental Terms</h3><ul class="pet-policy">'. $list[0]->innertext.'</ul><h3>Pet Policy</h3><ul class="pet-policy">'. $list[1]->innertext.'</ul>';
             }
 
+            // Agent details
+
+
+            $agent = substr($listItem->description,strpos($listItem->description,"Leasing Agent")+15);
+            $agentEndpos = strpos($agent,"<br />")-4;
+            $agent = substr($agent,0,$agentEndpos);
+            // $listItem->agentName = substr($agent,0,strpos($agent," -"));
+            // $listItem->agentPhone = substr($agent,strpos($agent,"- ")+2);$listItem->agentPhone = substr($listItem->agentPhone,0,strpos($listItem->agentPhone," |"));
+            //$listItem->agentEmail = trim(substr($agent,strpos($agent,"| ")+2));
+            // $listItem->agentPhone = $agent;
+            $matches = array();
+            if(preg_match("/(Agent\W+\w+\s\w+)/", $listItem->description,$matches,PREG_OFFSET_CAPTURE,0)){
+                $listItem->agentName = $matches[0][0];
+            }
+            if(preg_match("/(?:\(|\b)[\d]{3}\s*\)?[.-]?\s*[\d]{3}\s*[.-]\s*[\d]{3,4}\b/", $listItem->description,$matches,PREG_OFFSET_CAPTURE,0)){
+                $listItem->agentPhone = $matches[0][0];
+            }
+            if(preg_match("/[\._a-zA-Z0-9-]+@[\._a-zA-Z0-9-]+\.([a-z]{2,4})/i", $listItem->description,$matches,PREG_OFFSET_CAPTURE,0)){
+                $listItem->agentEmail = $matches[0][0];
+            }
+
+            $listItem->description .= '<h3>Agent Details</h3><ul class="agent"><li>'.$listItem->agentName.'</li><li>Phone - <a href="tel:'.$listItem->agentPhone.'">'.  $listItem->agentPhone .'</a></li><li>Email - <a href="mailto:'.$listItem->agentEmail.'">'.$listItem->agentEmail.'</a></li></ul>';
+
+
             $listItem->amount = str_replace(",","",$listItem->amount);
             $listItem->applicationFee = str_replace(",","" ,$listItem->applicationFee);
             $listItem->secDeposit = str_replace(",","",$listItem->secDeposit);
@@ -489,11 +622,6 @@ class clsAppfoSyListingWrapper{
             $listItem->applyNowUrl = "https://smartland.appfolio.com/listings/rental_applications/new?listable_uid=".$listItem->listingId;
 
 
-            // Agent details
-            $agent = substr($listItem->description,strpos($listItem->description,"Leasing Agent: ")+15); $agent = substr($agent,0,strpos($agent,"<br>")-4);
-            $listItem->agentName = substr($agent,0,strpos($agent," -"));
-            $listItem->agentPhone = substr($agent,strpos($agent,"- ")+2);$listItem->agentPhone = substr($listItem->agentPhone,0,strpos($listItem->agentPhone," |"));
-            $listItem->agentEmail = trim(substr($agent,strpos($agent,"| ")+2));
 
             // Images
             $lowres = $listing_posttype = get_option(APPFOSYPERFIX . 'lowres');
@@ -518,6 +646,7 @@ class clsAppfoSyListingWrapper{
         catch (\Exception $e){
             $_appfosyncLogger = new clsAppfoSyLogWriter();
             $_appfosyncLogger->warning($e->getMessage());
+            $_appfosyncLogger->emailNotification('Scraping the listing details from '.$listingId.' was unsuccessfull.');
         }
 
     }

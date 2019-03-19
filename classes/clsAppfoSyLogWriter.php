@@ -95,6 +95,16 @@ namespace appfoliosync;
         // Write time, url, & message to end of file
         fwrite($this->file, "[$time] [$path] : [$severity] - $message" . PHP_EOL);
     }
+
+     public function emailNotification($message){
+        try{
+            $_email = get_option( APPFOSYPERFIX . 'notification_email' );
+            wp_mail($_email,APPFOSYNAME.' notification',$message);
+        }
+        catch(\Exception $e){
+            $this->warning($e->getMessage());
+        }
+     }
     /**
      * Open log file
      * @return void

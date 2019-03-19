@@ -99,6 +99,16 @@ class clsAppfoSyoptions
 
             // Text field
             array(
+                'id'       => 'notification_email',
+                'type'    => 'text',
+                'default' => '',
+                'name'    => __( 'Email address for Notification.', APPFOSYTD ),
+                'desc'    => __( 'This email address will get notified if the auto sync process will not ren successfully.', APPFOSYTD ),
+            ),
+
+
+            // Text field
+            array(
                 'id'       => 'manual_import',
                 'type'    => 'button',
                 'default' => 'Import',
@@ -179,12 +189,27 @@ class clsAppfoSyoptions
             array(
                 'id'       => 'lowres',
                 'type'    => 'checkbox',
-                'default' => '0',
+                'default' => '1',
                 'label' => '',
                 'name'    => __( 'Use low-res images', APPFOSYTD ),
                 'desc'    => __( 'Use low resolution images to import.', APPFOSYTD ),
             ),
-
+            array(
+                'id'       => 'agentasuser',
+                'type'    => 'checkbox',
+                'default' => '0',
+                'label' => '',
+                'name'    => __( 'Import agents', APPFOSYTD ),
+                'desc'    => __( 'Import agent as a user to wordpress cms. To do this you must have installed and activated wp-real-estate pro plugin.', APPFOSYTD ),
+            ),
+            array(
+                'id'       => 'agentasusershow',
+                'type'    => 'checkbox',
+                'default' => '0',
+                'label' => '',
+                'name'    => __( 'Display agents contact details', APPFOSYTD ),
+                'desc'    => __( 'Display agents contact details on single listing page.  To do this you must have installed and activated wp-real-estate pro plugin.', APPFOSYTD ),
+            ),
 
             // Close tab: WP real estate plugin related
             array(

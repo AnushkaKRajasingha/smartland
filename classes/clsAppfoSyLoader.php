@@ -12,8 +12,6 @@ class clsAppfoSyLoader
         register_activation_hook(APPFOSYDIRPATH.'/appfolio-sync.php', array($this,'appfosy_activation'));
         register_deactivation_hook(APPFOSYDIRPATH.'/appfolio-sync.php', array($this,'appfosy_deactivation'));
 
-
-
         require_once  'clsAppfoSyLogWriter.php';
         require_once 'clsAppfoSyoptions.php';
         require_once 'clsAppfoSyListings.php';
@@ -25,6 +23,21 @@ class clsAppfoSyLoader
 
         $options = new clsAppfoSyoptions();
         $listings = new clsAppfoSyListings();
+
+        add_action( 'appfosy_event', array($this,'cron_appfosy_event'), 10, 0 );
+    }
+
+    public function cron_appfosy_event() {
+        $_appfosyncLogger = new clsAppfoSyLogWriter();
+        try{
+            $msg = 'Corn event "appfosy_event" has been fired at '.time();
+            $_appfosyncLogger->emailNotification();
+            $_appfosyncLogger->warning($msg);
+
+        }catch(\Exception $e){
+
+            $_appfosyncLogger->warning($e->getMessage());
+        }
     }
 
     public function appfosy_scripts()
@@ -50,6 +63,7 @@ class clsAppfoSyLoader
     public function appfosy_activation(){
         if (! wp_next_scheduled ( 'appfosy_event' )) {
             $schedu = get_option( APPFOSYPERFIX . 'schedu' );
+            if(!isset($schedu) || empty($schedu)) $schedu = 'hourly';
             wp_schedule_event(time(), $schedu, 'appfosy_event');
         }
     }
@@ -60,6 +74,7 @@ class clsAppfoSyLoader
 
     function get_appfosy_template($archive_template)
     {
+        return $archive_template;
         global $post;
         $_appfoposttype = get_option('appfoposttype');
         if ($post->post_type == $_appfoposttype) {
