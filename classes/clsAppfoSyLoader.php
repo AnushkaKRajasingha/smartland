@@ -9,15 +9,14 @@ class clsAppfoSyLoader
 {
     function __construct()
     {
-        register_activation_hook(APPFOSYDIRPATH.'/appfolio-sync.php', array($this,'appfosy_activation'));
-        register_deactivation_hook(APPFOSYDIRPATH.'/appfolio-sync.php', array($this,'appfosy_deactivation'));
+        register_activation_hook(APPFOSYDIRPATH.'/price-monitor.php', array($this,'appfosy_activation'));
+        register_deactivation_hook(APPFOSYDIRPATH.'/price-monitor.php', array($this,'appfosy_deactivation'));
 
         require_once  'clsAppfoSyLogWriter.php';
         require_once 'clsAppfoSyoptions.php';
         require_once 'clsAppfoSyListings.php';
 
         add_action('wp_enqueue_scripts', array( $this, 'appfosy_scripts' ));
-        add_filter('template_include', array( $this, 'get_appfosy_template' ));
         add_filter('wp_enqueue_scripts', array( $this, 'appfosy_scripts' ));
 
 
@@ -71,17 +70,5 @@ class clsAppfoSyLoader
     public function appfosy_deactivation() {
         wp_clear_scheduled_hook('appfosy_event');
     }
-
-    function get_appfosy_template($archive_template)
-    {
-        return $archive_template;
-        global $post;
-        $_appfoposttype = get_option('appfoposttype');
-        if ($post->post_type == $_appfoposttype) {
-            $archive_template = APPFOSYDIRPATH . '/templates/custlistingcategory.php';
-        }
-        return $archive_template;
-    }
-
 
 }

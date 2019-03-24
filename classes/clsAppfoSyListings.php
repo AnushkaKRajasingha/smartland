@@ -107,7 +107,8 @@ class clsAppfoSyListings
                             '_wre_listing_agent' => $_admin_user_id[0],
                             '_wre_listing_hide' => ($agentasusershow == true) ? array() : array('4' => 'contact_form','5' => 'agent'),
                             '_wre_listing_building_size' => $listitem[0]->area,
-                            '_wre_listing_image_gallery' => array()
+                            '_wre_listing_image_gallery' => array(),
+                            '_wre_listing_secdeposit' => $listitem[0]->secDeposit
 
                         );
 
@@ -213,7 +214,7 @@ class clsAppfoSyListings
     public function doappfosyncsingle(){
         try{
                 if(isset($_GET['lid'])) {
-                    $id = $_GET['lid'];
+                    $id = sanitize_key($_GET['lid']);
 
                     $item = $this->wrapper->listingDetail($id);
 
@@ -388,8 +389,10 @@ class clsAppfoSyListingWrapper{
     {
         // $list =  $this->scrapeListingList();
 
+        $_domain = get_option( APPFOSYPERFIX . 'listing_domain' );
+
         $this->needle = '/listings/detail/';
-        $this->domain = 'https://smartland.appfolio.com';
+        $this->domain = $_domain; // 'https://smartland.appfolio.com';
         $this->limited = get_option( APPFOSYPERFIX . 'limit' );
 
         //$item  = $this->listingDetail("b2289c40-16be-46e0-a660-6d49a6335484");
@@ -402,7 +405,7 @@ class clsAppfoSyListingWrapper{
             $listingsList_array = array();
             $counter = 0; $_limit = 1;
 
-            $listingUrl = get_option( APPFOSYPERFIX . 'listing_url' );
+            $listingUrl = get_option( APPFOSYPERFIX . 'listing_domain' ).get_option( APPFOSYPERFIX . 'listing_url' );
 
             //Validating listing url
             if($listingUrl === '#' || !preg_match("/(http[s]?:\/\/)?[^\s([\"<,>]*\.[^\s[\",><]*/",$listingUrl)) { throw new \Exception( 'invalid URL - '.$listingUrl ); exit();}
@@ -413,7 +416,7 @@ class clsAppfoSyListingWrapper{
             if((isset($_POST['lid']) && !empty($_POST['lid'])) ||  (isset($_GET['lid']) && !empty($_GET['lid']))){
 
 
-                $_listingid = (isset($_POST['lid']) && !empty($_POST['lid'])) ? $_POST['lid'] : $_GET['lid'];
+                $_listingid = (isset($_POST['lid']) && !empty($_POST['lid'])) ? sanitize_key($_POST['lid']) : sanitize_key($_GET['lid']);
                 $_post = $this->getPostbyListingid($_listingid);
 
                 $listingsList_array[$_listingid] = [$domain,$this->needle.$_listingid,1,$_post];
@@ -490,7 +493,8 @@ class clsAppfoSyListingWrapper{
             $listItem = new clsAppfolioListItem();
             //Listing ID
             $listItem->listingId = $listingId;
-
+           // var_dump($listingUrl);
+           // return $html;
             //Title
             $_title = $html->find('title');
             $listItem->title = $_title[0]->innertext;
@@ -608,7 +612,10 @@ class clsAppfoSyListingWrapper{
             $listItem->applicationFee = str_replace(",","" ,$listItem->applicationFee);
             $listItem->secDeposit = str_replace(",","",$listItem->secDeposit);
 
-            $listItem->description .=  '<a href="https://smartland.appfolio.com/listings/rental_applications/new?listable_uid='.$listItem->listingId.'&source=Website" class="btn btn-primary button" target="_blank">Apply Now</a>';
+            // applynow url
+            $listItem->applyNowUrl = get_option( APPFOSYPERFIX . 'applynow_url' ).$listItem->listingId;
+
+            $listItem->description .=  '<a href="'.$listItem->applyNowUrl.'&source=Website" class="btn btn-primary button" target="_blank">Apply Now</a>';
 
 
             // pet policy
@@ -618,8 +625,7 @@ class clsAppfoSyListingWrapper{
                 array_push($listItem->petAllowed,$item->innertext);
             }
 
-            // applynow url
-            $listItem->applyNowUrl = "https://smartland.appfolio.com/listings/rental_applications/new?listable_uid=".$listItem->listingId;
+
 
 
 

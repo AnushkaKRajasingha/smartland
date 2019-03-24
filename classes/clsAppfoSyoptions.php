@@ -52,10 +52,28 @@ class clsAppfoSyoptions
                 'name' => __( APPFOSYNAME. ' Plugin Settings', APPFOSYTD ),
             ),
 
+            // listing domain
+            array(
+                'id'       => 'listing_domain',
+                'type'    => 'text',
+                'default' => 'listing',
+                'name'    => __( 'Listing domain', APPFOSYTD ),
+                'desc'    => __( 'web domain of the listing site. ex : https://yoursubdomain.appfolio.com', APPFOSYTD ),
+            ),
+
+            //apply now url
+            array(
+                'id'       => 'applynow_url',
+                'type'    => 'url',
+                'default' => '#',
+                'name'    => __( 'Apply Now button URL', APPFOSYTD ),
+                'desc'    => __( 'URL to the rapply now button.', APPFOSYTD ),
+            ),
+
             // URL field
             array(
                 'id'       => 'listing_url',
-                'type'    => 'url',
+                'type'    => 'text',
                 'default' => '#',
                 'name'    => __( 'Listing URL', APPFOSYTD ),
                 'desc'    => __( 'URL to the real estate listing.', APPFOSYTD ),
